@@ -39,14 +39,13 @@ class LinkedList:
             pointer.next = Node(value) # chego no ultimo no, e avanco mais um, adicionando agora um outro no na ultima posicao
         else:
             self.head = value
-        self._size = self._size + 1
-
+        self._size += 1
     """
         remover um elemento da lista
     """
     def remove(self, index):
         if not self.head: #se trata de uma exceção, não faz sentido puxar um if normal
-            raise IndexError("Lista vazia") 
+            raise IndexError("empty list") 
         if index == 0:
             self.head = self.head.next
             return #finaliza o programa caso o indice seja 0
@@ -61,27 +60,46 @@ class LinkedList:
             pointer.next = target.next #acessa o valor do nó seguinte ao que estou(index - 1), e atribui o valor do nó que esta após ao nó que quero remover
         else:
             raise IndexError("list index out of range")
+        self._size -= 1
+
         
     """
         buscar um elemento da lista
     """
-    def search(value):
-        pass
+    def search(self, index):
+        if not self.head:
+            raise IndexError("empty list")
+        pointer = self.head
+        for i in range(index):
+            if pointer.next:
+                pointer = pointer.next
+            else: 
+                raise IndexError("list index out of range")
+        return pointer
+        
     """
         imprimir os elementos na lista
     """
-    def print_list():
-        pass
+    def print_list(self):
+        if not self.head:
+            raise("empty list")
+        pointer = self.head
+        while pointer:
+            print(pointer.data)
+            pointer = pointer.next
     """
         retornar o tamanho da lista
     """
-    def size():
-        pass
+    def size(self):
+        return self._size
+    
     """
         verificar se a lista está vazia
     """
-    def is_empty():
-        pass
+    def is_empty(self):
+        if not self.head:
+            raise IndexError("empty list")
+
 
 lista = LinkedList()
 print(lista.insert_beginning(5))
